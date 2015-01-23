@@ -1,0 +1,46 @@
+doctype html
+
+// @author: Daniel Fang
+// @email: danfang@uw.edu
+
+html(lang="en")
+	head
+		include includes/head
+	body
+		#menu: include includes/menu
+
+		#global-wrapper
+			section#top.container-fluid: include includes/top
+
+			section#bio.container-fluid: include includes/bio
+
+			section#work.container-fluid: include includes/work
+			
+			section#education.container-fluid: include includes/education
+			
+			// Contact section appears below the page on mobile versions
+			section.visible-xs.visible-sm
+				#mobile-contact.row
+					.col-xs-3.col-sm-3.img-responsive
+						a(target="_blank" href="https://www.facebook.com/Fang.Dan/"): img(src="img/fb.png")
+					.col-xs-3.col-sm-3.img-responsive
+						a(target="_blank" href="https://www.linkedin.com/in/danfang1"): img(src="img/linkedin.png")
+					.col-xs-3.col-sm-3.img-responsive
+						a(target="_blank" href="mailto:danfang@uw.edu"): img(src="img/email.png")
+					.col-xs-3.col-sm-3.img-responsive
+						a(target="_blank" href="https://www.quora.com/Daniel-Fang-7"): img(src="img/quora.png")
+
+			section#credits
+				p Built and designed by Daniel Fang, 2015
+				p Created using HTML5, CSS3, 
+					a(target="_blank" href="http://getbootstrap.com/") Bootstrap
+					| , and 
+					a(target="_blank" href="http://jquery.com/") jQuery 
+				p Icons made by 
+					a(target="_blank" href="http://www.freepik.com" title="Freepik") Freepik 
+					| from 
+					a(target="_blank" href="http://www.flaticon.com" title="Flaticon") Flaticon 
+					| are licensed under 
+					a(target="_blank" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0") CC BY 3.0
+
+		script(src="js/homepage.js")
