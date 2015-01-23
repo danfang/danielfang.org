@@ -90,18 +90,10 @@
  	position: fixed;
  	width: 100%;
  	z-index: 100;
- 	transition: all .5s;
- 	-moz-transition: all .5s;
- 	-o-transition: all .5s;
- 	-webkit-transition: all .5s;
  }
 
  #menu .row .pagelink {
  	color: #272822;
- 	transition: all .5s;
- 	-moz-transition: all .5s;
- 	-o-transition: all .5s;
- 	-webkit-transition: all .5s;
  }
 
  #menu .row .pagelink:hover {
@@ -147,10 +139,6 @@
  #global-wrapper {
  	margin-top: 80px;
  	position: relative;
- 	transition: all .5s;
- 	-moz-transition: all .5s;
- 	-o-transition: all .5s;
- 	-webkit-transition: all .5s;
  }
 
  #menu.open + #global-wrapper {
@@ -218,6 +206,7 @@
  	background-color: #272822;
  	color: white;
  	position: inherit;
+ 	height: 700px;
  }
 
  #seemore {

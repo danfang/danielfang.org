@@ -5,30 +5,28 @@
  */
 
 var theater = new TheaterJS();
+var curTagline = "";
+var config = { speed: 1.0, accuracy: 1.0 };
+var slower = { speed: .92, accuracy: 1.0 };
+var screens = [["#top", "#bio"], ["#work"], ["#education"]];
+var active = screens[0];
+var taglines = ["", "work/", "education/"];
 
 $(document).ready(function() {
-
-	var curTagline = "";
-
-	var config = { speed: 1.0, accuracy: 1.0 };
-	var slower = { speed: .92, accuracy: 1.0 };
-	theater.describe("tag", config, "#tagline");
-	theater.describe("base", config, "#tagline-base");
-
-	theater.describe("ls", slower, "#ls");
-	theater.describe("name", slower, "#name");
-
-	theater.write("base: home/");
+	
 	// initial title page resize 
 	resizeTop();
 
 	$(window).resize(function() {
 		resizeTop();
 	});
+	
+	theater.describe("tag", config, "#tagline");
+	theater.describe("base", config, "#tagline-base");
+	theater.describe("ls", slower, "#ls");
+	theater.describe("name", slower, "#name");
 
-	var screens = [["#top", "#bio"], ["#work"], ["#education"]];
-	var active = screens[0];
-
+	theater.write("base: home/");
 	theater.write("ls:ls");
 	theater.write("name:\"Daniel Fang\"");
 
@@ -38,17 +36,6 @@ $(document).ready(function() {
 		$(this).toggleClass("show");
 	});
 
-	// scrolling triggers
-	$(window).scroll(function() {
-		// making bio appear
-		$("#bio p").each(function() {
-			if ($(window).scrollTop() + $(window).height() - 150 > $(this).offset().top) {
-				$(this).addClass("onload");
-			}
-		});
-	});
-
-	taglines = ["", "work/", "education/"];
 
 	// scrolling via menu
 	$(".pagelink").each(function(index) {
@@ -60,12 +47,12 @@ $(document).ready(function() {
 
 			$("#mobile-contact").fadeToggle();
 			$("#credits").fadeToggle();
+
 			active = screens[index];
 
 			for (key in active) {
 				$(active[key]).delay(500).slideToggle();
 			}
-
 
 			$("#mobile-contact").delay(500).fadeToggle();
 			$("#credits").delay(500).fadeToggle();
