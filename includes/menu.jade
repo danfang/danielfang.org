@@ -1,16 +1,22 @@
-#tagline-container.hidden-xs > 
+#tagline-container.hidden-xs
 	span#tagline-base
 	span#tagline.action
 #pagelinks.row
-	.pagelink HOME
-	.pagelink WORK
-	.pagelink EDUCATION
-#contact.row
-	.col-md-3.img-responsive
-		a(target="_blank", href="https://www.facebook.com/Fang.Dan/"): img(src="img/fb.png")
-	.col-md-3.img-responsive
-		a(target="_blank" href="https://www.linkedin.com/in/danfang1"): img(src="img/linkedin.png")
-	.col-md-3.img-responsive
-		a(target="_blank" href="mailto:danfang@uw.edu"): img(src="img/email.png")
-	.col-md-3.img-responsive
-		a(target="_blank" href="https://www.quora.com/Daniel-Fang-7"): img(src="img/quora.png")
+	.pagelink.col-md-4.col-xs-4.col-sm-4.col-lg-4
+		a.fa.fa-home
+		| HOME
+	.pagelink.col-md-4.col-xs-4.col-sm-4.col-lg-4
+		a.fa.fa-briefcase
+		| WORK
+	.pagelink.col-md-4.col-xs-4.col-sm-4.col-lg-4
+		a.fa.fa-leaf
+		| EDUCATION
+#contacts.hidden-xs.hidden-sm
+	.contact
+		a(target="_blank", href="https://www.facebook.com/Fang.Dan/"): span.fa.fa-facebook-square.fa-2x
+	.contact
+		a(target="_blank" href="https://www.linkedin.com/in/danfang1"): span.fa.fa-linkedin-square.fa-2x
+	.contact
+		a(target="_blank" href="mailto:danfang@uw.edu"): span.fa.fa-envelope-square.fa-2x
+	.contact
+		a(target="_blank" href="https://github.com/danfang"): span.fa.fa-github-square.fa-2x
