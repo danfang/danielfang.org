@@ -30,7 +30,11 @@ $(document).ready(function() {
 	theater.write("ls:ls");
 	theater.write("name:Daniel Fang");
 
-	$("#title h2").delay(2500).fadeToggle();
+	$("#title h2").delay(2500).queue(function() {
+		$(this).show();
+		$(this).addClass("animated fadeInUp");
+		$(this).dequeue();
+	});
 
 	$(".shard-container").click(function() {
 		$(this).toggleClass("show");
