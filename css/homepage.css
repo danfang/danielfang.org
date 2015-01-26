@@ -4,8 +4,6 @@
 * Page style
 */
 
-@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,100italic,300italic,400italic);
-@import url(http://fonts.googleapis.com/css?family=Raleway:200);
 @import url(http://fonts.googleapis.com/css?family=Abel);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 
@@ -13,6 +11,16 @@ html, body, div, li {
 	font-family: 'Abel', sans-serif;
 	font-weight: 300;
 	overflow-x: hidden;
+}
+
+.dot {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+
+	border-radius: 30px;
+	background-color: #ecf0f1;
+	opacity: .05;
 }
 
 .fa {
@@ -289,6 +297,7 @@ section {
 	text-align: center;
 	top: -75px;
 	width: 800px;
+	z-index: 5000;
 }
 
 #title h2 {

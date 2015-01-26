@@ -60,13 +60,15 @@ $(document).ready(function() {
 				$(active[key]).delay(500).slideToggle();
 			}
 
-			$(".shard").each(function(index) {
-				$(this).delay(200 * (index + 3)).queue(function() {
-					$(this).css("opacity", 1);
-					$(this).addClass("animated fadeInUp");
-					$(this).dequeue();
-				});
-			});	
+			if (active.indexOf("#work") != -1 ) {
+				$(".shard").each(function(index) {
+					$(this).delay(200 * (index + 5)).queue(function() {
+						$(this).css("opacity", 1);
+						$(this).addClass("animated fadeInUp");
+						$(this).dequeue();
+					});
+				});	
+			}
 
 			$("#mobile-contact").delay(500).fadeToggle();
 			$("#credits").delay(500).fadeToggle();
