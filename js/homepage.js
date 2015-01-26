@@ -56,12 +56,26 @@ $(document).ready(function() {
 			$(".shard").removeClass("animated fadeInUp");
 			$(".shard").css("opacity", 0);
 
+
+			$(".education-section").removeClass("animated fadeInUp");
+			$(".education-section").css("opacity", 0);
+
 			for (key in active) {
 				$(active[key]).delay(500).slideToggle();
 			}
 
 			if (active.indexOf("#work") != -1 ) {
 				$(".shard").each(function(index) {
+					$(this).delay(200 * (index + 5)).queue(function() {
+						$(this).css("opacity", 1);
+						$(this).addClass("animated fadeInUp");
+						$(this).dequeue();
+					});
+				});	
+			}
+
+			if (active.indexOf("#education") != -1 ) {
+				$(".education-section").each(function(index) {
 					$(this).delay(200 * (index + 5)).queue(function() {
 						$(this).css("opacity", 1);
 						$(this).addClass("animated fadeInUp");

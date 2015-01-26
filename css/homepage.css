@@ -13,16 +13,6 @@ html, body, div, li {
 	overflow-x: hidden;
 }
 
-.dot {
-	position: absolute;
-	width: 30px;
-	height: 30px;
-
-	border-radius: 30px;
-	background-color: #ecf0f1;
-	opacity: .05;
-}
-
 .fa {
 	color: #272822;
 }
@@ -37,10 +27,6 @@ html, body, div, li {
 
 a {
 	color: #66D9EF;	
-}
-
-#work, #education {
-	display: none;
 }
 
 p, h3, h4 {
@@ -60,65 +46,53 @@ hr {
 }
 
 hr:after {
-	position: absolute;
-	left: 50%;
-	width: 10px;
 	content: "";
 	height: 10px;
+	left: 50%;
 	margin-top: -5px;
+	position: absolute;
+	width: 10px;
 	transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	-o-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 }
 
-#bio hr {
-	border-top: 1px solid #666;
-	max-width: 350px;
-}
-
-#bio hr:after {
-	background-color: #272822;
-}
-
-#work hr:after, #education hr:after {
-	background-color: #ecf0f1;
-}
-
-#work hr, #education hr {
-	border-top: 1px solid #ecf0f1;
-	max-width: 450px;
-}
-
-#contacts {
-	position: absolute;
-	right: 30px;
-	top: 30px;
-	width: 200px;
-}
-
-.contact {
-	margin-left: 0;
-	text-align: left;
-	width: 50px;
-	display: inline-block;
-	position: relative;
+#menu {
+	background-color: white;
+	border: 1px solid #272822;
+	color: #272822;
+	height: 80px;
 	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+}
+
+#tagline-container {
+	border-right: 1px solid #DDD;
+	cursor: default;
+	float: left;
+	font-size: 25px;
+	letter-spacing: 1px;
+	height: 100%;
+	margin-left: 30px;
+	padding-top: 24px;
+	width: 215px;
 }
 
 #pagelinks {
-	margin-left: 0;
-	color: #272822;
 	display: inline-block;
+	margin-left: 0;
 	width: 500px;
 }
 
 #pagelinks .fa {
 	margin-right: 8px;
-	transition: all .25s;
-	-moz-transition: all .25s;
-	-o-transition: all .25s;
-	-webkit-transition: all .25s;
+	transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	-webkit-transition: all .25s ease-in-out;
 }
 
 @media screen and (max-width: 768px) {
@@ -129,46 +103,47 @@ hr:after {
 
 .pagelink {
 	border-right: 1px solid #ddd;
+	color: #272822;
 	cursor: pointer;
 	display: inline-block;
+	height: 80px;
 	padding: 30px 0;
 	text-align: center;
-	height: 80px;
-	color: #272822;
-	transition: all .25s;
-	-moz-transition: all .25s;
-	-o-transition: all .25s;
-	-webkit-transition: all .25s;
+	transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	-webkit-transition: all .25s ease-in-out;
 }
 
 .pagelink:hover .fa, .pagelink:hover {
-	color: #ecf0f1;
 	background-color: #272822;
+	color: #ecf0f1;
 }
 
-#menu {
-	background-color: white;
-	border: 1px solid #272822;
-	height: 80px;
-	overflow: hidden;
-	position: fixed;
-	width: 100%;
-	z-index: 100;
+#contacts {
+	position: absolute;
+	right: 30px;
+	top: 30px;
+	width: 200px;
 }
 
-#tagline-container {
-	cursor: default;
-	float: left;
-	font-size: 25px;
-	height: 100%;
-	margin-left: 30px;
-	padding-top: 24px;
-	width: 215px;
-	border-right: 1px solid #DDD;
+#contacts .fa {
+	opacity: .75;
+	padding-top: 2px;
+	transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
 }
 
-#tagline-base {
-	color: #272822;
+#contacts .fa:hover {
+	opacity: 1;
+}
+
+.contact {
+	display: inline-block;
+	text-align: left;
+	width: 50px;
 }
 
 #global-wrapper {
@@ -176,25 +151,18 @@ hr:after {
 	position: relative;
 }
 
-#menu.open + #global-wrapper {
-	left: 250px;
+#work, #education {
+	display: none;
 }
 
 section h1 {
 	font-size: 40px;
-	font-weight: 100;
 	letter-spacing: 5px;
 	text-align: center;
 }
 
 section {
 	padding: 20px 0 60px 0;
-}
-
-.divider {
-	border-top: 1px #AAA solid;
-	margin: auto;
-	width: 70%;
 }
 
 @media screen and (max-width: 768px) {
@@ -207,19 +175,8 @@ section {
 #top h1 {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 70px;
-	font-weight: 400;
+	font-weight: 300;
 	letter-spacing: 8px;
-}
-
-#top .scaps {
-	font-weight: 400;
-	font-size: 50px;
-}
-
-@media screen and (max-width: 768px) {
-	#top .scaps {
-		font-size: 20px;
-	}
 }
 
 #top h2 {
@@ -227,13 +184,12 @@ section {
 	font-style: italic;
 	font-weight: 300;
 	letter-spacing: 3px;
+	display: none;
 }
 
 #top {
-	background-color: #272822;
-	color: white;
-	position: inherit;
 	height: 700px;
+	position: relative;
 }
 
 #seemore {
@@ -249,11 +205,11 @@ section {
 	position: absolute;
 	right: 0;
 	text-align: center;
-	transition: all .25s;
-	-moz-transition: all .25s;
-	-o-transition: all .25s;
-	-webkit-transition: all .25s;
 	width: 50px;
+	transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	-webkit-transition: all .25s ease-in-out;
 }
 
 #seemore:hover {
@@ -269,21 +225,12 @@ section {
 
 	#top h2 {
 		font-size: 18px;
-		font-weight: 300;
 	}
 }
 
 #top, #work, #education {
 	background-color: #272822;
 	color: white;
-}
-
-#experiences {
-	max-width: 800px;
-}
-
-#projects, #experiences {
-	overflow: hidden;
 }
 
 #title {
@@ -297,11 +244,6 @@ section {
 	text-align: center;
 	top: -75px;
 	width: 800px;
-	z-index: 5000;
-}
-
-#title h2 {
-	display: none;
 }
 
 #title hr {
@@ -325,7 +267,7 @@ section {
 }
 
 #bio {
-	color: #272822;
+	color: #666;
 }
 
 #bio a, #credits a, .shard a {
@@ -334,10 +276,6 @@ section {
 
 #bio a:hover, #credits a:hover, .shard a:hover {
 	text-decoration: underline;
-}
-
-.shard a {
-	font-weight: bold;
 }
 
 #bio p {
@@ -380,6 +318,15 @@ section {
 #work .row {
 	width: 80%;
 	margin: auto;
+	overflow: hidden;
+}
+
+#experiences {
+	max-width: 800px;
+}
+
+.shard a {
+	font-weight: 400;
 }
 
 .shard {
@@ -392,10 +339,10 @@ section {
 	padding-bottom: 25px;
 	padding-top: 25px;
 	text-align: center;
-	transition: all .5s;
-	-moz-transition: all .5s;
-	-o-transition: all .5s;
-	-webkit-transition: all .5s;
+	transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -410,10 +357,10 @@ section {
 	overflow: hidden;
 	position: absolute;
 	right: 0;
-	transition: all .5s;
-	-moz-transition: all .5s;
-	-o-transition: all .5s;
-	-webkit-transition: all .5s;
+	transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out;
 	width: 90%;
 }
 
@@ -426,19 +373,19 @@ section {
 	position: absolute;	
 	right: 0;
 	top: 250px;
-	transition: top .25s;
-	-moz-transition: top .25s;
-	-o-transition: top .25s;
-	-webkit-transition: top .25s;
+	transition: top .25s ease-in-out;
+	-moz-transition: top .25s ease-in-out;
+	-o-transition: top .25s ease-in-out;
+	-webkit-transition: top .25s ease-in-out;
 }
 
 .shard-img-container {
 	margin-top: 20px;
 	text-align: center;
-	transition: margin-top .25s;
-	-moz-transition: margin-top .25s;
-	-o-transition: margin-top .25s;
-	-webkit-transition: margin-top .25s;
+	transition: margin-top .25s ease-in-out;
+	-moz-transition: margin-top .25s ease-in-out;
+	-o-transition: margin-top .25s ease-in-out;
+	-webkit-transition: margin-top .25s ease-in-out;
 }
 
 .shard-img-container img {
@@ -449,10 +396,10 @@ section {
 .more img {
 	opacity: .5;
 	width: 20px;
-	transition: all .4s;
-	-moz-transition: all .4s;
-	-o-transition: all .4s;
-	-webkit-transition: all .4s;
+	transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	-o-transition: all .4s ease-in-out;
+	-webkit-transition: all .4s ease-in-out;
 }
 
 .shard-container.show .more img {
@@ -498,36 +445,8 @@ section {
 	}
 }
 
-a.course {
-	color: #FD971F;
-}
-
-a.course:hover {
-	color: #66D9EF;
-}
-
-.thumbnail {
-	min-height: 220px;
-}
-
-#contacts .fa {
-	opacity: .8;
-	padding-top: 2px;
-	transition: all .3s ease-in-out;
-	-moz-transition: all .3s ease-in-out;
-	-o-transition: all .3s ease-in-out;
-	-webkit-transition: all .3s ease-in-out;
-}
-
-.helper {
-	display: inline-block;
-	height: 100%;
-	vertical-align: middle;
-}
-
-.club img {
-	vertical-align: middle;
-	max-width: 160px;
+#clubs {
+	margin-top: 20px;
 }
 
 #education {
@@ -535,28 +454,66 @@ a.course:hover {
 }
 
 #education-container {
-	max-width: 800px;
-	margin-right: auto;
 	margin-left: auto;
+	margin-right: auto;
+	max-width: 800px;
 }
 
 .education-section {
+	background-color: #333;
 	margin-bottom: 25px;
+	padding: 25px;
 }
 
-#contacts .fa:hover {
-	opacity: 1;
+#uw-logo {
+	height: 40px;
+	margin: 20px;
+}
+
+@media screen and (max-width: 768px) {
+	#uw-logo {
+		height: 20px;
+		margin: 25px 0;
+	}
+}
+
+.course {
+	color: #FD971F;
+}
+
+.course:hover {
+	color: #66D9EF;
+}
+
+.thumbnail {
+	margin-bottom: 0;
+	min-height: 220px;
+}
+
+.club img {
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+@media screen and (max-width: 768px) {
+	.club {
+		margin-bottom: 25px;
+	}
 }
 
 #mobile-contact {
-	padding-top: 25px;
-	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
+	padding-top: 25px;
+	text-align: center;
 }
 
 #credits {
 	background-color: #EEE;
-	text-align: center;
 	padding-bottom: 25px;
+	text-align: center;
 }
