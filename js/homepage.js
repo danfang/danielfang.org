@@ -28,14 +28,13 @@ $(document).ready(function() {
 
 	theater.write("base: home/");
 	theater.write("ls:ls");
-	theater.write("name:\"Daniel Fang\"");
+	theater.write("name:Daniel Fang");
 
 	$("#title h2").delay(2500).fadeToggle();
 
 	$(".shard-container").click(function() {
 		$(this).toggleClass("show");
 	});
-
 
 	// scrolling via menu
 	$(".pagelink").each(function(index) {
@@ -50,9 +49,20 @@ $(document).ready(function() {
 
 			active = screens[index];
 
+			$(".shard").removeClass("animated fadeInUp");
+			$(".shard").css("opacity", 0);
+
 			for (key in active) {
 				$(active[key]).delay(500).slideToggle();
 			}
+
+			$(".shard").each(function(index) {
+				$(this).delay(200 * (index + 3)).queue(function() {
+					$(this).css("opacity", 1);
+					$(this).addClass("animated fadeInUp");
+					$(this).dequeue();
+				});
+			});	
 
 			$("#mobile-contact").delay(500).fadeToggle();
 			$("#credits").delay(500).fadeToggle();
