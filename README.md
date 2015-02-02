@@ -1,6 +1,10 @@
 # danielfang.org
-Personal Website
+This is my personal website!
 
-## TODO:
+It's built using Jade, HTML5, CSS3, JQuery, Animate.css, Theater.js, and Bootstrap.
 
-Refactor with Jade, represent data with JSON (for easier manipulation).
+### TODO
+
+- Consider redesigning with material design
+
+- use JSON to represent data (although mixins are pretty good)
