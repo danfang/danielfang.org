@@ -23,14 +23,10 @@ $(document).ready(function() {
 	
 	theater.describe("tag", config, "#tagline");
 	theater.describe("base", config, "#tagline-base");
-	theater.describe("ls", slower, "#ls");
-	theater.describe("name", slower, "#name");
 
 	theater.write("base: home/");
-	theater.write("ls:ls");
-	theater.write("name:Daniel Fang");
 
-	$("#title h2").delay(2500).queue(function() {
+	$("#title h2").delay(500).queue(function() {
 		$(this).show();
 		$(this).addClass("animated fadeInUp");
 		$(this).dequeue();
