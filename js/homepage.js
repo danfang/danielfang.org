@@ -13,6 +13,19 @@ var active = screens[0];
 var taglines = ["", "work/", "education/"];
 
 $(document).ready(function() {
+
+	var chart = c3.generate({
+	    bindto: '#chart',
+	    data: {
+	      	columns: [
+	      		["FullStackWebPython", 0.26259943284384], ["DesktopLinux", 0.142942919636253], ["FullStackWebNodeJS", 0.110394773701236], ["DesktopOSX", 0.0698010150105798], ["FullStackWebJava", 0.0542110098153007], ["BackEndWebCloud", 0.0411369265976539], ["FullStackWebPHP", 0.0382670831167222]
+	      	],
+	      	type: 'donut'
+	    },
+	    donut : {
+	    	title: "Technology Stack"
+	    }
+	});
 	
 	// initial title page resize 
 	resizeTop();
