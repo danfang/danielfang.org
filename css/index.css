@@ -1,0 +1,78 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+
+* {
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1 {
+	margin-bottom: 15px;
+	letter-spacing: 4px;
+	cursor: default;
+}
+
+#content {
+	max-width: 600px;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 650px;
+}
+
+#bio p {
+	color: #666;
+}
+
+#bio a {
+	color: #F92672;	
+}
+
+#links {
+	margin-bottom: 25px;
+}
+
+#links a {
+	color: #333;
+	font-size: 22px;
+	margin-left: 40px;
+	margin-right: 40px;
+	transition: all .1s linear;
+	-moz-transition: all .1s linear;
+	-o-transition: all .1s linear;
+	-webkit-transition: all .1s linear;
+}
+
+#links a:hover {
+	color: #999;
+}
+
+#social {
+	margin-top: 25px;
+}
+
+#social a {
+
+	font-weight: 400;
+}
+
+#social a {
+	color: #333;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+h1 {
+	font-size: 60px;
+}
+
+h2 {
+	font-size: 25px;
+}
