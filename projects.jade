@@ -2,9 +2,10 @@ extends layouts/layout
 
 block title
     title Daniel Fang - Projects
+    - var projects = true;
 
 block content
-    h2 Personal Projects
+    h2 Personal
 
     +activity('Linecut', 'Jan 2015 - present')
             p.content Created a 
@@ -49,7 +50,9 @@ block content
             hr
 
     +activity('Student RND Labs', 'June 2013 - Aug 2013')
-            p.content Created and published a side-scrolling game onto the Google Play Store.
+            p.content Created and published a 
+                a(target="_blank" href="https://play.google.com/store/apps/details?id=com.picotech.lightrunnerlibgdx&amp;hl=en") side-scrolling game
+                |  onto the Google Play Store.
             p.tech
                 span Java
                 span LibGDX

@@ -4,11 +4,17 @@ h1 Daniel Fang
     hr
     .row
         .col-sm-3.col-md-3.link
+            if about
+                span.glyphicon.glyphicon-send
             a(href="/") ABOUT
         .col-sm-3.col-md-3.link
+            if work
+                span.glyphicon.glyphicon-send
             a(href="work.html") WORK
         .col-sm-3.col-md-3.link
+            if projects
+                span.glyphicon.glyphicon-send
             a(href="projects.html") PROJECTS
         .col-sm-3.col-md-3.link
-            a(href="resume.pdf") RESUM&Eacute;
+            a(target="_blank" href="resume.pdf") RESUM&Eacute;
     hr

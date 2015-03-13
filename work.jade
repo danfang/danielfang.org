@@ -2,16 +2,15 @@ extends layouts/layout
 
 block title
     title Daniel Fang - Work
+    - var work = true;
 
 block content
-    h2 Work Experience
-
-    +activity('Socrata', 'June 2015 - Sep 2015')
-            p.content Full stack software intern at a growth-stage startup. Socrata is the leader in open data for 
-                | local, national, and international municipals. Its goals include government transparency and
-                | data democratization.
-            p.tech
-            hr
+    //- +activity('Socrata', 'Summer 2015')
+    //-         p.content Full stack software intern at a growth-stage startup. Socrata is the leader in open data for 
+    //-             | local, national, and international municipals. Its goals include government transparency and
+    //-             | data democratization.
+    //-         p.tech
+    //-         hr
 
     +activity('Omni', 'July 2014 - Jan 2015')
             p.content Worked at a pre-seed startup aimed at bringing digital currency support to merchants.

@@ -6,7 +6,7 @@
 	font-weight: 300;
 }
 
-a, a:hover {
+a, a:hover, a:active, a:visited {
 	text-decoration: none;
 }
 
@@ -56,11 +56,14 @@ h2 {
 	margin-right: auto;
 }
 
+.glyphicon {
+	color: #333;
+	margin-right: 7px;
+}
+
 #links a {
 	color: #333;
 	font-size: 15px;
-	margin-left: 40px;
-	margin-right: 40px;
 	transition: all .15s linear;
 	-moz-transition: all .15s linear;
 	-o-transition: all .15s linear;
@@ -100,11 +103,11 @@ h2 {
 	margin-bottom: 150px;
 }
 
-#social a {
+#social .expand a {
 	font-weight: 400;
 }
 
-#social a {
+#social .expand a {
 	color: #333;
 	margin-left: 10px;
 	margin-right: 10px;	
@@ -114,23 +117,23 @@ h2 {
 	-webkit-transition: all .15s linear;
 }
 
-#social a:nth-child(1):hover {
+#social .expand:nth-child(1) a:hover {
 	color: #3b5998;
 }
 
-#social a:nth-child(2):hover {
+#social .expand:nth-child(2) a:hover {
 	color: #0077B5;
 }
 
-#social a:nth-child(3):hover {
+#social .expand:nth-child(3) a:hover {
 	color: #27ae60;
 }
 
-#social a:nth-child(4):hover {
+#social .expand:nth-child(4) a:hover {
 	color: #e74c3c;
 }
 
-#social a:nth-child(5):hover {
+#social .expand:nth-child(5) a:hover {
 	color: #f39c12;
 }
 
