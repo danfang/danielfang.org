@@ -1,0 +1,107 @@
+doctype html
+html
+    head
+        link(rel="stylesheet" href="css/index.css")
+        link(rel="shortcut icon" href="img/favicon.png")
+        meta(charset="UTF-8")
+        meta(name="description" content="Daniel Fang is a student at The University of Washington - Class of 2017")
+        meta(name="keywords" content="Dan,Daniel,Fang,UW,University,Washington,CSE,2017,Computer,Science,Redmond,WA,Washington,98052,98105,Seattle")
+        meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+    body
+        #content
+            include includes/menu
+
+            h2 Personal Projects
+
+            mixin activity(title, date)
+                .work
+                    hr
+                    p.title= title
+                    p.date= date
+                    block
+
+            +activity('Linecut', 'Jan 2015 - present')
+                    p.content Created a 
+                        a(target="_blank" href="http://linecut.io:3000/") service
+                        |  for managing large campus events in real-time. 
+                        | Vendors who use the service are able to easily notify customers of wait times via website, mobile application, and text message.
+                    p.tech
+                        span PostgreSQL
+                        span Node.js
+                        span Twilio API
+                        span AWS
+                    hr
+
+            +activity('rmw', 'Jan 2014 - Feb 2015')
+                    p.content Created a simple 
+                        a(target="_blank" href="http://github.com/danfang/rmw") reminder service
+                        |  built for the Command Line.
+                    p.tech
+                        span Python
+                        span Unix
+                    hr
+
+            +activity('Seattle Police Blotter', 'Jan 2015 - Feb 2015')
+                    p.content Created a real-time 
+                        a(target="_blank" href="http://code.danielfang.org/liveblotter/") web application 
+                        | to monitor Police and Fire Department alerts around Seattle.
+                    p.tech
+                        span Node.js
+                        span HTML5 Websockets
+                        span Google Maps API
+                        span Socrata API
+                    hr
+
+            +activity('UW Tutor Network', 'Apr 2014 - Aug 2014')
+                    p.content Created a website to centralize the UW tutoring system. 
+                        | Allows for simple communication between tutors and students.
+                        | Used a webscraper to index the entire UW Time Schedule.
+                    p.tech
+                        span MySQL
+                        span PHP
+                        span Python
+                    hr
+
+            +activity('Student RND Labs', 'June 2013 - Aug 2013')
+                    p.content Created and published a side-scrolling game onto the Google Play Store.
+                    p.tech
+                        span Java
+                        span LibGDX
+                    hr
+
+            +activity('Project Euler', 'Jan 2013 - June 2014')
+                    p.content Completed 
+                        a(target="_blank" href="https://projecteuler.net/progress=danfang") Project Euler
+                        |  problems and wrote a 
+                        a(target="_blank" href="https://github.com/danfang/Algorithms/blob/master/src/PerformanceTest.java") benchmarking program
+                        |  to test program efficiency.
+                    p.tech
+                        span Java
+                    hr
+
+            h2 Hackathons
+
+            +activity('Project Euler', 'Jan 2013 - June 2014')
+                    p.content Created a service called 
+                        a(href="http://refinehousing.com") Refine
+                        |  that makes housing decisions smarter and more personalized to users' needs.
+                    p.tech
+                        span Node.js
+                        span PostgreSQL
+                        span Python
+                        span Java (Android)
+                        span HUD Open Data
+                        span Socrata Open Data
+                    hr
+
+            include includes/social
+                
+        // Google Analytics
+        script.
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-57931888-2', 'auto');
+            ga('send', 'pageview');

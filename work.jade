@@ -11,22 +11,32 @@ html
         #content
             include includes/menu
 
-            #bio
-                p Hi there!
-                p A few things about me.
-                p Student at the 
-                    a(href="http://uw.edu") University of Washington
-                    | .
-                p Studying Computer Science, Math, and Linguistics.
-                p Currently working on 
-                    a(href="http://linecut.io:3000") Linecut
-                    | , a service for event management.
-                p Interning in Seattle at 
-                    a(href="http://socrata.com") Socrata
-                    |  for Summer 2015.
-                p Feel free to reach out to me below -
-                p Always happy to chat!
-                p Thanks :)
+            h2 Work Experience
+
+            .work
+                hr 
+                p.title Socrata
+                p.date June 2015 - Sep 2015
+                p.content Full stack software intern at a growth-stage startup. Socrata is the leader in open data for 
+                    | local, national, and international municipals. Its goals include government transparency and
+                    | data democratization.
+                p.tech
+                hr
+
+            .work
+                hr 
+                p.title Omni
+                p.date July 2014 - Jan 2015
+                p.content Worked at a pre-seed startup aimed at bringing digital currency support to merchants.
+                    | Lead developer, managing 20+ projects regarding transaction fraud detection, accounting, and web app.
+                p.tech
+                    span PostgreSQL
+                    span Python (+Django)
+                    span C++
+                    span Java
+                    span AWS
+                    span Linux
+                hr
 
             include includes/social
                 
