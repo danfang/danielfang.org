@@ -6,7 +6,7 @@
 	font-weight: 300;
 }
 
-a {
+a, a:hover {
 	text-decoration: none;
 }
 
@@ -20,17 +20,18 @@ h1 {
 	margin-bottom: 15px;
 	letter-spacing: 4px;
 	cursor: default;
+	font-weight: 300;
+}
+
+h2 {
+	font-weight: 300;
 }
 
 #content {
+	margin-top: 100px;
 	max-width: 800px;
-	margin: auto;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	height: 650px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #bio p {
@@ -49,8 +50,10 @@ h1 {
 	margin-bottom: 25px;
 }
 
-#links hr {
+#links hr, #links .row {
 	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #links a {
@@ -62,6 +65,30 @@ h1 {
 	-moz-transition: all .15s linear;
 	-o-transition: all .15s linear;
 	-webkit-transition: all .15s linear;
+}
+
+.expand {
+	display: inline;
+}
+
+@media (max-width: 768px) {
+	h1 {
+		font-size: 35px;
+	}
+
+	.link {
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+
+	#bio p {
+		font-size: 10px;
+	}
+
+	.expand {
+		display: block;
+		margin-bottom: 15px;
+	}
 }
 
 #links a:hover {
@@ -79,8 +106,8 @@ h1 {
 
 #social a {
 	color: #333;
-	margin-left: 5px;
-	margin-right: 5px;	
+	margin-left: 10px;
+	margin-right: 10px;	
 	transition: all .15s linear;
 	-moz-transition: all .15s linear;
 	-o-transition: all .15s linear;
@@ -107,29 +134,30 @@ h1 {
 	color: #f39c12;
 }
 
-.work a {
+.activity a {
 	color: #A6E22E;
 }
 
-.work {
+.activity {
 	margin-bottom: 50px;
 	padding-left: 15px;
 }
 
-.work p {
+.activity p {
 	text-align: left;
 }
 
-.work .title {
+.activity .title {
 	font-weight: 400;
+	font-size: 18px;
 }
 
-.work .date {
+.activity .date {
 	font-size: 12px;
 	float: right;
 }
 
-.work .content {
+.activity .content {
 	font-size: 14px;
 	line-height: 25px;
 	padding-right: 150px;

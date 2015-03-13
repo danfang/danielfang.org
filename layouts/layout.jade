@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        block title
+        include ../includes/head
+    body
+        #content.container-fluid
+            include ../includes/menu
+
+            mixin activity(title, date)
+                .activity
+                    hr
+                    p.title= title
+                    p.date= date
+                    block
+
+            block content
+
+            include ../includes/social
