@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+@import url(http://fonts.googleapis.com/css?family=Merriweather);
 
 * {
 	text-align: center;
@@ -16,14 +17,18 @@ hr {
 }
 
 h1 {
-	font-size: 50px;
+	font-size: 30px;
+	font-family: 'Merriweather', serif;
 	margin-bottom: 15px;
 	letter-spacing: 4px;
 	cursor: default;
-	font-weight: 300;
+	font-weight: 400;
 }
 
 h2 {
+	font-size: 25px;
+	letter-spacing: 2px;
+	margin-bottom: 28px;
 	font-weight: 300;
 }
 
@@ -75,9 +80,6 @@ h2 {
 }
 
 @media (max-width: 768px) {
-	h1 {
-		font-size: 35px;
-	}
 
 	.link {
 		margin-top: 15px;
@@ -141,9 +143,12 @@ h2 {
 	color: #A6E22E;
 }
 
+.activity + hr {
+	margin-bottom: 30px;
+}
+
 .activity {
-	margin-bottom: 50px;
-	padding-left: 15px;
+	padding: 20px 10px;
 }
 
 .activity p {

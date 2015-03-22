@@ -8,11 +8,12 @@ html
             include ../includes/menu
 
             mixin activity(title, date)
+                hr
                 .activity
-                    hr
                     p.title= title
                     p.date= date
                     block
+                hr
 
             block content
 
