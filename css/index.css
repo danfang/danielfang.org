@@ -39,6 +39,11 @@ h2 {
 	margin-right: auto;
 }
 
+#bio {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
 #bio p {
 	color: #666;
 }
@@ -64,15 +69,22 @@ h2 {
 .glyphicon {
 	color: #333;
 	margin-right: 7px;
+	height: 3px;
 }
 
 #links a {
 	color: #333;
-	font-size: 15px;
+	font-size: 13px;
+	letter-spacing: 1px;
 	transition: all .15s linear;
 	-moz-transition: all .15s linear;
 	-o-transition: all .15s linear;
 	-webkit-transition: all .15s linear;
+}
+
+
+#links a.faded, #links .glyphicon.faded {
+	color: #AAA;
 }
 
 .expand {
@@ -96,23 +108,18 @@ h2 {
 	}
 }
 
-#links a:hover {
-	color: #999;
-}
-
 #social {
-	margin-top: 30px;
-	margin-bottom: 150px;
+	margin: 50px auto 150px auto;
+	border: 1px solid #ddd;
+	padding: 25px 0;
+	max-width: 500px;
 }
 
 #social .expand a {
 	font-weight: 400;
-}
-
-#social .expand a {
 	color: #333;
-	margin-left: 10px;
-	margin-right: 10px;	
+	margin-left: 20px;
+	margin-right: 20px;	
 	transition: all .15s linear;
 	-moz-transition: all .15s linear;
 	-o-transition: all .15s linear;
@@ -175,4 +182,10 @@ h2 {
 	margin-right: 25px;
 	font-size: 14px;
 	font-weight: 400;
+}
+
+#credits {
+	font-size: 12px;
+	letter-spacing: 1px;
+	margin-bottom: 35px;
 }

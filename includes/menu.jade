@@ -4,17 +4,27 @@ h1 Daniel Fang
     hr
     .row
         .col-sm-3.col-md-3.link
-            if about
-                span.glyphicon.glyphicon-send
-            a(href="/") ABOUT
+            unless about
+                span.faded.glyphicon.glyphicon-pencil
+                a.faded(href="/") ABOUT
+            else
+                span.glyphicon.glyphicon-pencil
+                a(href="/") ABOUT
         .col-sm-3.col-md-3.link
-            if work
-                span.glyphicon.glyphicon-send
-            a(href="work.html") WORK
+            unless work
+                span.faded.glyphicon.glyphicon-briefcase
+                a.faded(href="work.html") WORK
+            else
+                span.glyphicon.glyphicon-briefcase
+                a(href="work.html") WORK
         .col-sm-3.col-md-3.link
-            if projects
-                span.glyphicon.glyphicon-send
-            a(href="projects.html") PROJECTS
+            unless projects
+                span.faded.glyphicon.glyphicon-heart
+                a.faded(href="projects.html") PROJECTS
+            else
+                span.glyphicon.glyphicon-heart
+                a(href="projects.html") PROJECTS
         .col-sm-3.col-md-3.link
-            a(target="_blank" href="resume.pdf") RESUM&Eacute;
+            span.faded.glyphicon.glyphicon-education
+            a.faded(target="_blank" href="resume.pdf") RESUM&Eacute;
     hr
