@@ -9,8 +9,9 @@ html
 
             mixin activity(title, date)
                 .activity
-                    p.title= title
-                    p.date= date
+                    .title-container
+                        p.title= title
+                        p.date= date
                     block
                 hr
 

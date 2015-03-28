@@ -33,7 +33,7 @@ h2 {
 }
 
 #content {
-	margin-top: 100px;
+	margin-top: 150px;
 	max-width: 800px;
 	margin-left: auto;
 	margin-right: auto;
@@ -46,6 +46,7 @@ h2 {
 
 #bio p {
 	color: #666;
+	font-size: 14px;
 }
 
 #bio a {
@@ -98,10 +99,6 @@ h2 {
 		margin-bottom: 15px;
 	}
 
-	#bio p {
-		font-size: 10px;
-	}
-
 	.expand {
 		display: block;
 		margin-bottom: 15px;
@@ -110,7 +107,6 @@ h2 {
 
 #social {
 	margin: 50px auto 150px auto;
-	border: 1px solid #ddd;
 	padding: 25px 0;
 	max-width: 500px;
 }
@@ -155,13 +151,12 @@ h2 {
 }
 
 .activity {
-	padding: 20px 10px;
+	padding: 15px 20px 5px 20px;
 }
 
 .activity p {
 	text-align: left;
 }
-
 .activity .title {
 	font-weight: 400;
 	font-size: 18px;
@@ -169,18 +164,17 @@ h2 {
 
 .activity .date {
 	font-size: 12px;
-	float: right;
 }
 
 .activity .content {
 	font-size: 14px;
 	line-height: 25px;
-	padding-right: 150px;
 }
 
 .tech span {
 	margin-right: 25px;
 	font-size: 14px;
+	line-height: 30px;
 	font-weight: 400;
 }
 
