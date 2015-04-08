@@ -1,9 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600);
 @import url(http://fonts.googleapis.com/css?family=Merriweather);
 
 * {
 	text-align: center;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 300;
 }
 
@@ -45,8 +45,8 @@ h2 {
 }
 
 #bio p {
-	color: #666;
-	font-size: 14px;
+	color: #21272d;
+	font-size: 16px;
 }
 
 #bio a {
@@ -68,13 +68,13 @@ h2 {
 }
 
 .glyphicon {
-	color: #333;
+	color: #21272d;
 	margin-right: 7px;
 	height: 3px;
 }
 
 #links a {
-	color: #333;
+	color: #21272d;
 	font-size: 13px;
 	letter-spacing: 1px;
 	transition: all .15s linear;
@@ -113,7 +113,7 @@ h2 {
 
 #social .expand a {
 	font-weight: 400;
-	color: #333;
+	color: #21272d;
 	margin-left: 20px;
 	margin-right: 20px;	
 	transition: all .15s linear;
@@ -143,6 +143,14 @@ h2 {
 }
 
 .activity a {
+	color: #6ACB80;
+	transition: all .15s linear;
+	-moz-transition: all .15s linear;
+	-o-transition: all .15s linear;
+	-webkit-transition: all .15s linear;
+}
+
+.activity a:hover {
 	color: #A6E22E;
 }
 
@@ -157,9 +165,10 @@ h2 {
 .activity p {
 	text-align: left;
 }
+
 .activity .title {
-	font-weight: 400;
-	font-size: 18px;
+	font-weight: 600;
+	font-size: 20px;
 }
 
 .activity .date {
@@ -167,8 +176,8 @@ h2 {
 }
 
 .activity .content {
-	font-size: 14px;
-	line-height: 25px;
+	font-size: 16px;
+	line-height: 1.7em;
 }
 
 .tech span {
