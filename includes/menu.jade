@@ -3,28 +3,15 @@ h1 Daniel Fang
 #links 
     hr
     .row
-        .col-sm-3.col-md-3.link
-            unless about
-                span.faded.glyphicon.glyphicon-pencil
-                a.faded(href="/") ABOUT
-            else
-                span.glyphicon.glyphicon-pencil
-                a(href="/") ABOUT
-        .col-sm-3.col-md-3.link
-            unless work
-                span.faded.glyphicon.glyphicon-briefcase
-                a.faded(href="work.html") WORK
-            else
-                span.glyphicon.glyphicon-briefcase
-                a(href="work.html") WORK
-        .col-sm-3.col-md-3.link
-            unless projects
-                span.faded.glyphicon.glyphicon-heart
-                a.faded(href="projects.html") PROJECTS
-            else
-                span.glyphicon.glyphicon-heart
-                a(href="projects.html") PROJECTS
-        .col-sm-3.col-md-3.link
-            span.faded.glyphicon.glyphicon-education
-            a.faded(target="_blank" href="resume.pdf") RESUM&Eacute;
+
+        mixin menuItem(glyphicon, pageName, link, title)
+            .col-xs-3.link
+                a(href=link)
+                    span.glyphicon(class={faded: currentUrl !== pageName} class="glyphicon-#{glyphicon}")
+                    span.hidden-xs(class={faded: currentUrl !== pageName}) !{title}
+
+        +menuItem('pencil', 'about', '/', 'ABOUT')
+        +menuItem('briefcase', 'work', 'work.html', 'WORK')
+        +menuItem('heart', 'projects', 'projects.html', 'PROJECTS')
+        +menuItem('education', 'resume', 'resume.pdf', 'RESUM&Eacute;')
     hr
