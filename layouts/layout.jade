@@ -7,12 +7,15 @@ html
         #content.container-fluid
             include ../includes/menu
 
-            mixin activity(title, date)
-                .activity
-                    .title-container
-                        p.title= title
-                        p.date= date
-                    block
+            mixin activity(title, date, img)
+                .activity.media
+                    .media-body
+                        .title-container
+                            p.title= title
+                            p.date= date
+                        block
+                    .media-right.media-middle
+                        img(src=img width="150px")
                 hr
 
             block content
