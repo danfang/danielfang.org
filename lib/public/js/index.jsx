@@ -278,5 +278,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.body);
+  React.render(<Handler/>, document.getElementById("global-container"));
 });

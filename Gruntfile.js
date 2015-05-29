@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
-      files: ['Gruntfile.js', 'lib/public/js/*.js'],
+      files: ['Gruntfile.js', 'lib/public/js/index.js'],
       options: {
         globals: { jQuery: true }
       }
