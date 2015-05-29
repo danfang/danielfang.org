@@ -6,6 +6,10 @@ var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
+var getFromNow = function(date) {
+	return moment(new Date(date)).fromNow();
+};
+
 var App = React.createClass({displayName: "App",
   render: function () {
     return (
@@ -13,8 +17,8 @@ var App = React.createClass({displayName: "App",
         React.createElement("header", {id: "nav"}, 
           React.createElement("ul", null, 
             React.createElement("li", null, React.createElement(Link, {to: "home"}, "Home")), 
-            React.createElement("li", null, React.createElement(Link, {to: "blog"}, "Blog")), 
-            React.createElement("li", null, React.createElement(Link, {to: "code"}, "Code"))
+            React.createElement("li", null, React.createElement(Link, {to: "code"}, "Code")), 
+            React.createElement("li", null, React.createElement("a", {target: "_blank", href: "resume.pdf"}, "Résumé"))
           )
         ), 
 
@@ -23,7 +27,7 @@ var App = React.createClass({displayName: "App",
         ), 
 
         React.createElement("footer", null, 
-        	React.createElement("p", null, "Made with ", React.createElement("a", {href: "https://github.com/danfang/me-api"}, "Me API"), ", React, and Sass")
+        	React.createElement("p", null, "Made with ", React.createElement("a", {target: "_blank", href: "https://github.com/danfang/me-api"}, "Me API"), ", React, and Sass")
         )
       )
     );
@@ -92,12 +96,12 @@ var Checkin = React.createClass({displayName: "Checkin",
 				React.createElement("div", {className: "media-body"}, 
 					React.createElement("p", {className: "location title"}, checkin.venue.name), 
 					React.createElement("p", {className: "description"}, checkin.shout), 
-					React.createElement("p", {className: "date"}, moment(checkin.createdAt * 1000).fromNow())
+					React.createElement("p", {className: "date"}, getFromNow(checkin.createdAt * 1000))
 				)
 			)
 		);
 	}
-})
+});
 
 var Tweet = React.createClass({displayName: "Tweet",
 	render: function() {
@@ -108,14 +112,16 @@ var Tweet = React.createClass({displayName: "Tweet",
 					React.createElement("i", {className: "fa fa-2x fa-twitter"})
 				), 
 				React.createElement("div", {className: "media-body"}, 
-					React.createElement("p", {className: "screenName title"}, "@", tweet.user.screen_name), 
+					React.createElement("a", {target: "_blank", href: "https://twitter.com/" + tweet.user.screen_name}, 
+						React.createElement("p", {className: "screenName title"}, "@", tweet.user.screen_name)
+					), 
 					React.createElement("p", {className: "description"}, tweet.text), 
-					React.createElement("p", {className: "date"}, moment(tweet.created_at).fromNow())
+					React.createElement("p", {className: "date"}, getFromNow(tweet.created_at))
 				)
 			)
 		);
 	}
-})
+});
 
 
 var BtcTransaction = React.createClass({displayName: "BtcTransaction",
@@ -134,7 +140,7 @@ var BtcTransaction = React.createClass({displayName: "BtcTransaction",
 						Math.abs(amount), " ", txn.amount.currency, " ", amount < 0 ? "to ": "from ", " ", recipient
 					), 
 					React.createElement("p", {className: "description"}, txn.notes), 
-					React.createElement("p", {className: "date"}, moment(txn.created_at).fromNow())
+					React.createElement("p", {className: "date"}, getFromNow(txn.created_at))
 				)
 			)
 		);
@@ -149,67 +155,6 @@ var BtcAddress = React.createClass({displayName: "BtcAddress",
 			React.createElement("div", {className: "btc-addr", id: "btc-addr"}, 
 				React.createElement("i", {className: "fa fa-btc"}), 
 				React.createElement("span", {className: "addr"}, addr.address.address)
-			)
-		);
-	}
-})
-
-var Blog = React.createClass({displayName: "Blog",
-	getInitialState: function() {
-		return { posts: [] };
-	},
-	componentDidMount: function() {
-		$.get(API_URL + "blog", function(data) {
-			console.log(data);
-			this.setState({ posts: data });
-		}.bind(this));
-	},
-	render: function() { 
-		if (!this.state.posts.length) return React.createElement("div", null);
-		var postNodes = this.state.posts.map(function(post, index) {
-			var paragraphs = post.previewContent.bodyModel.paragraphs;
-			var paragraphNodes = paragraphs.map(function(paragraph) {
-				if (paragraph.text === post.title) {
-					return React.createElement(Link, {to: "post", params: {postId: index}}, React.createElement("p", {className: "medium-" + paragraph.type}, paragraph.text));
-				}
-				return React.createElement("p", {className: "medium-" + paragraph.type}, paragraph.text);
-			});
-			return React.createElement("div", {className: "post"}, paragraphNodes);
-		});
-		return (
-			React.createElement("div", {id: "blog"}, 
-				React.createElement("h1", null, "Blog Example (credit ", React.createElement("a", {href: "https://medium.com/@amyngyn"}, "@amyngyn"), ")"), 
-				postNodes
-			)
-		);
-	}}
-);
-
-var Post = React.createClass({displayName: "Post",  
-	contextTypes: {
-	    router: React.PropTypes.func
-  	},
-	getInitialState: function() {
-		return { post: null };
-	},
-	componentDidMount: function() {
-		var postId = this.context.router.getCurrentParams().postId;
-		$.get(API_URL + "blog/" + postId, function(data) {
-			console.log(data);
-			this.setState({ post: data });
-		}.bind(this));
-	},
-	render: function() { 
-		if (!this.state.post) return React.createElement("div", null);
-		var post = this.state.post;
-		var paragraphNodes = post.content.bodyModel.paragraphs.map(function(paragraph){
-			return React.createElement("p", {className: "medium-" + paragraph.type}, paragraph.text);
-		});
-		return (
-			React.createElement("div", {id: "post"}, 
-				React.createElement("h1", null, post.title), 
-				React.createElement("h2", null, post.content.subtitle), 
-				paragraphNodes
 			)
 		);
 	}
@@ -233,10 +178,10 @@ var Code = React.createClass({displayName: "Code",
 			if (event.type == 'PushEvent') return React.createElement(PushEvent, {event: event});
 			if (event.type == 'PublicEvent') return React.createElement(PublicEvent, {event: event});
 			if (event.type == 'IssuesEvent') return React.createElement(IssuesEvent, {event: event});
-		})
-		return React.createElement("div", {id: "code"}, eventNodes)
-	}}
-);
+		});
+		return React.createElement("div", {id: "code"}, eventNodes);
+	}
+});
 
 var WatchEvent = React.createClass({displayName: "WatchEvent",
 	render: function() {
@@ -246,9 +191,9 @@ var WatchEvent = React.createClass({displayName: "WatchEvent",
 			React.createElement("div", {className: "github-event"}, 
 				React.createElement("p", {className: "title"}, 
 					React.createElement("i", {className: "fa fa-star fa-lg"}), 
-					"Starred ", React.createElement("a", {href: "https://github.com/" + repo.name}, repo.name)
+					"Starred ", React.createElement("a", {target: "_blank", href: "https://github.com/" + repo.name}, repo.name)
 				), 
-				React.createElement("p", {className: "date"}, moment(event.created_at).fromNow())
+				React.createElement("p", {className: "date"}, getFromNow(event.created_at))
 			)
 		);
 	}
@@ -263,9 +208,9 @@ var CreateEvent = React.createClass({displayName: "CreateEvent",
 				React.createElement("p", {className: "title"}, 
 					React.createElement("i", {className: "fa fa-code-fork fa-lg"}), 
 					"Created ", event.payload.ref_type, " ", event.payload.ref, " in", 
-					React.createElement("a", {href: "https://github.com/" + repo.name}, " ", repo.name)
+					React.createElement("a", {target: "_blank", href: "https://github.com/" + repo.name}, " ", repo.name)
 				), 
-				React.createElement("p", {className: "date"}, moment(event.created_at).fromNow())
+				React.createElement("p", {className: "date"}, getFromNow(event.created_at))
 			)
 		);
 	}
@@ -280,10 +225,10 @@ var PushEvent = React.createClass({displayName: "PushEvent",
 				React.createElement("p", {className: "title"}, 
 					React.createElement("i", {className: "fa fa-code fa-lg"}), 
 					"Pushed ", event.payload.commits.length, " commit", event.payload.commits.length == 1 ? "" : "s", " to", 
-					React.createElement("a", {href: "https://github.com/" + repo.name}, " ", repo.name)
+					React.createElement("a", {target: "_blank", href: "https://github.com/" + repo.name}, " ", repo.name)
 				), 
 				React.createElement("p", {className: "commit"}, "\"", event.payload.commits[0].message, "\" on ", event.payload.ref), 
-				React.createElement("p", {className: "date"}, moment(event.created_at).fromNow())
+				React.createElement("p", {className: "date"}, getFromNow(event.created_at))
 			)
 		);
 	}
@@ -297,9 +242,9 @@ var PublicEvent = React.createClass({displayName: "PublicEvent",
 			React.createElement("div", {className: "github-event"}, 
 				React.createElement("p", {className: "title"}, 
 					React.createElement("i", {className: "fa fa-code fa-lg"}), 
-					"Open sourced ", React.createElement("a", {href: "https://github.com/" + repo.name}, " ", repo.name)
+					"Open sourced ", React.createElement("a", {target: "_blank", href: "https://github.com/" + repo.name}, " ", repo.name)
 				), 
-				React.createElement("p", {className: "date"}, moment(event.created_at).fromNow())
+				React.createElement("p", {className: "date"}, getFromNow(event.created_at))
 			)
 		);
 	}
@@ -309,16 +254,16 @@ var IssuesEvent = React.createClass({displayName: "IssuesEvent",
 	render: function() {
 		var event = this.props.event;
 		var action = event.payload.action;
-		action = action.charAt(0).toUpperCase() + action.slice(1);;
+		action = action.charAt(0).toUpperCase() + action.slice(1);
 		var repo = event.repo;
 		return (
 			React.createElement("div", {className: "github-event"}, 
 				React.createElement("p", {className: "title"}, 
 					React.createElement("i", {className: "fa fa-code fa-lg"}), 
-					action, " ", React.createElement("a", {href: event.payload.issue.html_url}, "issue"), " in ", React.createElement("a", {href: "https://github.com/" + repo.name}, " ", repo.name)
+					action, " ", React.createElement("a", {target: "_blank", href: event.payload.issue.html_url}, "issue"), " in ", React.createElement("a", {target: "_blank", href: "https://github.com/" + repo.name}, " ", repo.name)
 				), 
 				React.createElement("p", {className: "description"}, event.payload.issue.title), 
-				React.createElement("p", {className: "date"}, moment(event.created_at).fromNow())
+				React.createElement("p", {className: "date"}, getFromNow(event.created_at))
 			)
 		);
 	}
@@ -327,12 +272,8 @@ var IssuesEvent = React.createClass({displayName: "IssuesEvent",
 
 var routes = (
   React.createElement(Route, {name: "app", path: "/", handler: App}, 
-    React.createElement(DefaultRoute, {name: "home", handler: Home}), 
-    React.createElement(Route, {name: "blog", handler: RouteHandler}, 
-    	React.createElement(Route, {name: "post", path: ":postId", handler: Post}), 
-    	React.createElement(DefaultRoute, {handler: Blog})
-    ), 
-    React.createElement(Route, {name: "code", handler: Code})
+    React.createElement(Route, {name: "code", handler: Code}), 
+    React.createElement(DefaultRoute, {name: "home", handler: Home})
   )
 );
 
