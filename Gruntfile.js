@@ -7,7 +7,10 @@ module.exports = function(grunt) {
         options: {
           style: 'expanded'
         },
-        files: { 'dist/css/index.css': 'lib/css/index.scss' }
+        files: { 
+          'dist/css/index.css': 'lib/public/css/index.scss',
+          'lib/public/css/index.css': 'lib/public/css/index.scss'
+        }
       }
     },
     jade: {
@@ -20,14 +23,26 @@ module.exports = function(grunt) {
         }
       }
     },
+    react: {
+      single_file_output: {
+        files: {
+          'dist/js/index.js': 'lib/public/js/index.jsx',
+          'lib/public/js/index.js': 'lib/public/js/index.jsx'
+        }
+      }
+    },
     watch: {
       css: {
-        files: ['lib/css/*.scss'],
+        files: ['lib/public/css/*.scss'],
         tasks: ['sass']
       },
       jade: {
         files: ['lib/views/*.jade'],
         tasks: ['jade']
+      },
+      react: {
+        files: ['lib/public/js/*.jsx'],
+        tasks: ['react']
       }
     }
   });
@@ -35,7 +50,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-react');
 
-  grunt.registerTask('default', ['sass', 'jade']);
+  grunt.registerTask('default', ['sass', 'jade', 'react']);
 
 };

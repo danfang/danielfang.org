@@ -2,9 +2,8 @@
   "name": "dfang-website",
   "version": "1.0.0",
   "description": "My personal website - powered by Me API",
-  "main": "node lib/app.js",
   "scripts": {
-    "start": "node lib/app.js"
+    "start": "lib/bin/www"
   },
   "repository": {
     "type": "git",
@@ -15,13 +14,14 @@
   "bugs": {
     "url": "https://github.com/danfang/danielfang.org/issues"
   },
-  "homepage": "http://ddanielfang.org",
+  "homepage": "http://danielfang.org",
   "devDependencies": {
     "express": "^4.12.4",
     "grunt": "^0.4.5",
     "grunt-contrib-jade": "^0.14.1",
     "grunt-contrib-sass": "^0.9.2",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-react": "^0.12.2",
     "jade": "^1.9.1"
   }
 }
