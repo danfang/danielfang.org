@@ -26,7 +26,7 @@ var App = React.createClass({
 		if (me) {
 			contactNode = (
 				<div id="contact">
-					<a target="_blank" href={me.contact.email}><i className="fa fa-envelope"></i></a>
+					<a target="_blank" href={"mailto:" + me.contact.email}><i className="fa fa-envelope"></i></a>
 					<a target="_blank" href={me.contact.facebook}><i className="fa fa-facebook"></i></a>
 					<a target="_blank" href={me.contact.github}><i className="fa fa-github"></i></a>
 					<a target="_blank" href={me.contact.linkedin}><i className="fa fa-linkedin"></i></a>
