@@ -11,39 +11,57 @@ var getFromNow = function(date) {
 };
 
 var App = React.createClass({displayName: "App",
-  render: function () {
-    return (
-      React.createElement("div", {className: true}, 
-        React.createElement("header", {id: "nav"}, 
-          React.createElement("ul", null, 
-            React.createElement("li", null, React.createElement(Link, {to: "home"}, "Home")), 
-            React.createElement("li", null, React.createElement(Link, {to: "code"}, "Code")), 
-            React.createElement("li", null, React.createElement("a", {target: "_blank", href: "resume.pdf"}, "Résumé"))
-          )
-        ), 
-
-        React.createElement("div", {id: "content"}, 
-        	React.createElement(RouteHandler, null)
-        ), 
-
-        React.createElement("footer", null, 
-        	React.createElement("p", null, "Made with ", React.createElement("a", {target: "_blank", href: "https://github.com/danfang/me-api"}, "Me API"), ", React, and Sass")
-        )
-      )
-    );
-  }
-});
-
-var Home = React.createClass({displayName: "Home",
 	getInitialState: function() {
-		return { me: null, tweets: [], checkins: [], btc: null };
+		return { me: null };
 	},
 	componentDidMount: function() {
 		$.get(API_URL, function(data) {
 			console.log(data);
 			this.setState({ me: data.me });
 		}.bind(this));
+	},
+	render: function () {
+		var me = this.state.me;
+		var contactNode;
+		if (me) {
+			contactNode = (
+				React.createElement("div", {id: "contact"}, 
+					React.createElement("a", {target: "_blank", href: me.contact.email}, React.createElement("i", {className: "fa fa-envelope"})), 
+					React.createElement("a", {target: "_blank", href: me.contact.facebook}, React.createElement("i", {className: "fa fa-facebook"})), 
+					React.createElement("a", {target: "_blank", href: me.contact.github}, React.createElement("i", {className: "fa fa-github"})), 
+					React.createElement("a", {target: "_blank", href: me.contact.linkedin}, React.createElement("i", {className: "fa fa-linkedin"})), 
+					React.createElement("a", {target: "_blank", href: me.contact.twitter}, React.createElement("i", {className: "fa fa-twitter"}))
+				)
+			);
+		}
+		return (
+			React.createElement("div", {className: true}, 
+				React.createElement("header", {id: "nav"}, 
+					React.createElement("ul", null, 
+						React.createElement("li", null, React.createElement(Link, {to: "home"}, "Home")), 
+						React.createElement("li", null, React.createElement(Link, {to: "code"}, "Code")), 
+						React.createElement("li", null, React.createElement("a", {target: "_blank", href: "resume.pdf"}, "Résumé"))
+					)
+				), 
 
+				React.createElement("div", {id: "content"}, 
+					React.createElement(RouteHandler, {me: this.state.me})
+				), 
+
+				React.createElement("footer", null, 
+					React.createElement("p", null, "Made with ", React.createElement("a", {target: "_blank", href: "https://github.com/danfang/me-api"}, "Me API"), ", React, and Sass"), 
+					contactNode
+				)
+			)
+		);
+	}
+});
+
+var Home = React.createClass({displayName: "Home",
+	getInitialState: function() {
+		return { tweets: [], checkins: [], btc: null };
+	},
+	componentDidMount: function() {
 		$.get(API_URL + "twitter", function(data) {
 			console.log(data);
 			this.setState({ tweets: data.tweets });
@@ -60,7 +78,7 @@ var Home = React.createClass({displayName: "Home",
 		}.bind(this));
 	},
 	render: function() { 
-		var me = this.state.me;
+		var me = this.props.me;
 		if (!me) return React.createElement("div", null);
 		var checkinNode = this.state.checkins.length ? React.createElement(Checkin, {checkin: this.state.checkins[0]}) : "";
 		var tweetNode = this.state.tweets.length ? React.createElement(Tweet, {tweet: this.state.tweets[0]}) : "";
@@ -69,16 +87,14 @@ var Home = React.createClass({displayName: "Home",
 		return (
 			React.createElement("div", {id: "home"}, 
 				React.createElement("div", {className: "overview"}, 
-					React.createElement("h2", null, me.name), 
-					React.createElement("p", null, me.bio)
+					React.createElement("h1", null, me.name), 
+					React.createElement("p", {className: "bio"}, me.bio), 
+					React.createElement("p", null, "Currently working on ", React.createElement("a", {target: "_blank", href: me.currentWork.url}, me.currentWork.name), ".")
 				), 
 				React.createElement("div", {id: "status", className: "row"}, 
 					checkinNode, 
 					tweetNode, 
 					txnNode
-				), 
-				React.createElement("div", {className: "pay"}, 
-					addressNode
 				)
 			)
 		);
@@ -88,13 +104,16 @@ var Home = React.createClass({displayName: "Home",
 var Checkin = React.createClass({displayName: "Checkin",
 	render: function() {
 		var checkin = this.props.checkin;
+		var venue = checkin.venue;
+		var mapsURL = "https://www.google.com/maps?z=12&t=m&q=loc:";
+		mapsURL += venue.location.lat + "+" + venue.location.lng;
 		return (
 			React.createElement("div", {className: "checkin media col-md-4", id: "latest-checkin"}, 
 				React.createElement("div", {className: "media-left"}, 
-					React.createElement("i", {className: "fa fa-2x fa-map-marker"})
+					React.createElement("a", {target: "_blank", href: mapsURL}, React.createElement("i", {className: "fa fa-2x fa-map-marker"}))
 				), 
 				React.createElement("div", {className: "media-body"}, 
-					React.createElement("p", {className: "location title"}, checkin.venue.name), 
+					React.createElement("a", {target: "_blank", href: mapsURL}, React.createElement("p", {className: "location title"}, checkin.venue.name)), 
 					React.createElement("p", {className: "description"}, checkin.shout), 
 					React.createElement("p", {className: "date"}, getFromNow(checkin.createdAt * 1000))
 				)
@@ -106,13 +125,16 @@ var Checkin = React.createClass({displayName: "Checkin",
 var Tweet = React.createClass({displayName: "Tweet",
 	render: function() {
 		var tweet = this.props.tweet;
+		var twitterURL = "https://twitter.com/" + tweet.user.screen_name;
 		return (
 			React.createElement("div", {className: "tweet media col-md-4", id: "latest-tweet"}, 
 				React.createElement("div", {className: "media-left"}, 
-					React.createElement("i", {className: "fa fa-2x fa-twitter"})
+					React.createElement("a", {target: "_blank", href: twitterURL}, 
+						React.createElement("i", {className: "fa fa-2x fa-twitter"})
+					)
 				), 
 				React.createElement("div", {className: "media-body"}, 
-					React.createElement("a", {target: "_blank", href: "https://twitter.com/" + tweet.user.screen_name}, 
+					React.createElement("a", {target: "_blank", href: twitterURL}, 
 						React.createElement("p", {className: "screenName title"}, "@", tweet.user.screen_name)
 					), 
 					React.createElement("p", {className: "description"}, tweet.text), 
@@ -129,15 +151,20 @@ var BtcTransaction = React.createClass({displayName: "BtcTransaction",
 		var txn = this.props.txn;
 		var amount = Number(txn.amount.amount);
 		var recipient = txn.recipient ? txn.recipient.name : txn.recipient_address.splice(5);
+		var coinbaseURL = "https://www.coinbase.com/join/dfang1";
 		return (
 			React.createElement("div", {className: "btc-txn media col-md-4", id: "latest-txn"}, 
 				React.createElement("div", {className: "media-left"}, 
-					React.createElement("i", {className: "fa fa-2x fa-money"})
+					React.createElement("a", {target: "_blank", href: coinbaseURL}, 
+						React.createElement("i", {className: "fa fa-2x fa-money"})
+					)
 				), 
-				React.createElement("div", {className: "media-body"}, 
-					React.createElement("p", {className: "title"}, 
-						amount < 0 ? "Sent ": "Received ", 
-						Math.abs(amount), " ", txn.amount.currency, " ", amount < 0 ? "to ": "from ", " ", recipient
+				React.createElement("div", {className: "media-body"}, 					
+					React.createElement("a", {target: "_blank", href: coinbaseURL}, 
+						React.createElement("p", {className: "title"}, 
+							amount < 0 ? "Sent ": "Received ", 
+							Math.abs(amount), " ", txn.amount.currency, " ", amount < 0 ? "to ": "from ", " ", recipient
+						)
 					), 
 					React.createElement("p", {className: "description"}, txn.notes), 
 					React.createElement("p", {className: "date"}, getFromNow(txn.created_at))
@@ -179,7 +206,14 @@ var Code = React.createClass({displayName: "Code",
 			if (event.type == 'PublicEvent') return React.createElement(PublicEvent, {event: event});
 			if (event.type == 'IssuesEvent') return React.createElement(IssuesEvent, {event: event});
 		});
-		return React.createElement("div", {id: "code"}, eventNodes);
+		return (
+			React.createElement("div", {id: "code"}, 
+				React.createElement("h1", null, "My latest Github activity"), 
+				React.createElement("div", {className: "events"}, 
+					eventNodes
+				)
+			)
+		);
 	}
 });
 
@@ -190,7 +224,7 @@ var WatchEvent = React.createClass({displayName: "WatchEvent",
 		return (
 			React.createElement("div", {className: "github-event"}, 
 				React.createElement("p", {className: "title"}, 
-					React.createElement("i", {className: "fa fa-star fa-lg"}), 
+					React.createElement("i", {className: "fa fa-star-o fa-lg"}), 
 					"Starred ", React.createElement("a", {target: "_blank", href: "https://github.com/" + repo.name}, repo.name)
 				), 
 				React.createElement("p", {className: "date"}, getFromNow(event.created_at))
@@ -259,7 +293,7 @@ var IssuesEvent = React.createClass({displayName: "IssuesEvent",
 		return (
 			React.createElement("div", {className: "github-event"}, 
 				React.createElement("p", {className: "title"}, 
-					React.createElement("i", {className: "fa fa-code fa-lg"}), 
+					React.createElement("i", {className: "fa fa-flag-o fa-lg"}), 
 					action, " ", React.createElement("a", {target: "_blank", href: event.payload.issue.html_url}, "issue"), " in ", React.createElement("a", {target: "_blank", href: "https://github.com/" + repo.name}, " ", repo.name)
 				), 
 				React.createElement("p", {className: "description"}, event.payload.issue.title), 
