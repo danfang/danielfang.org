@@ -3,10 +3,22 @@
 $dark: #21272d;
 $light: rgba(0, 0, 0, 0.3);
 
+$screen-xs: 768px;
+
+@mixin mobile {
+	@media (max-width: #{$screen-xs}) {
+		@content;
+	}
+}
+
 body {
-  padding: 50px;
-  font: 14px "Open Sans", "Lucida Grande", Helvetica, sans-serif;
-  color: #21272d;
+	padding: 50px;
+	font: 14px "Open Sans", "Lucida Grande", Helvetica, sans-serif;
+	color: #21272d;
+
+	@include mobile {
+		padding: 50px 10px;
+	}
 }
 
 a, a:hover, a:focus {
@@ -20,7 +32,7 @@ a, a:hover, a:focus {
 
 	li {
 		display: inline-block;
-		width: 90px;
+		width: 100px;
 	}
 }
 
@@ -60,15 +72,14 @@ h1 {
 	#status {
 		margin: auto;
 		max-width: 1000px;
-		padding: 50px 25px;
+		padding: 25px 25px;
 		background-color: aliceblue;
 		border-radius: 5px;
 	}
 
 	#status .media {
 
-		margin-top: 0;
-		margin-bottom: 25px;
+		margin: 30px 0;
 		vertical-align: top;
 		text-align: left;
 
@@ -98,7 +109,6 @@ h1 {
 
 		}
 	}
-
 }
 
 #code {
