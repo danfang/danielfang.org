@@ -24,16 +24,16 @@ a, a:hover, a:focus {
 }
 
 a {
-	color: #e74c3c;
+	color: #c0392b;
 }
 
 a:hover {
-	color: #c0392b;
+	color: #e74c3c;
 }
 
 #nav {
 	ul {
-		padding-left: 0;
+		padding-left: 3px;
 	}
 
 	li {
@@ -57,7 +57,7 @@ a:hover {
 }
 
 #nav, #content {
-	max-width: 950px;
+	max-width: 850px;
 	margin: auto;
 }
 
@@ -83,11 +83,16 @@ h1 {
 
 #home {
 
-	padding: 80px 0 40px 0;
+	padding: 80px 0 80px 0;
 
 	.overview {
 		margin-bottom: 80px;
 		font-size: 16px;
+
+		.current {
+			margin-top: 16px;
+			font-weight: 600;
+		}
 	}
 
 	#status {

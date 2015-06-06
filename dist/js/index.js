@@ -89,7 +89,7 @@ var Home = React.createClass({displayName: "Home",
 				React.createElement("div", {className: "overview"}, 
 					React.createElement("h1", null, me.name), 
 					React.createElement("p", {className: "bio"}, me.bio), 
-					React.createElement("p", null, "Currently working on ", React.createElement("a", {target: "_blank", href: me.currentWork.url}, me.currentWork.name), ".")
+					React.createElement("p", {className: "current"}, "Currently working on ", React.createElement("a", {target: "_blank", href: me.currentWork.url}, me.currentWork.name), ".")
 				), 
 				React.createElement("div", {id: "status", className: "row"}, 
 					checkinNode, 

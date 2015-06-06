@@ -89,7 +89,7 @@ var Home = React.createClass({
 				<div className="overview">
 					<h1>{me.name}</h1>
 					<p className="bio">{me.bio}</p>
-					<p>Currently working on <a target="_blank" href={me.currentWork.url}>{me.currentWork.name}</a>.</p>
+					<p className="current">Currently working on <a target="_blank" href={me.currentWork.url}>{me.currentWork.name}</a>.</p>
 				</div>
 				<div id="status" className="row">
 					{checkinNode}
