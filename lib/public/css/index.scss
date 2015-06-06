@@ -1,6 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700);
-
-$dark: #21272d;
+$dark: #666;
 $light: rgba(0, 0, 0, 0.3);
 
 $screen-xs: 768px;
@@ -13,8 +11,8 @@ $screen-xs: 768px;
 
 body {
 	padding: 50px;
-	font: 14px "Open Sans", "Lucida Grande", Helvetica, sans-serif;
-	color: #21272d;
+	font: 14px "adelle", "Lucida Grande", Helvetica, sans-serif;
+	color: $dark;
 
 	@include mobile {
 		padding: 50px 10px;
@@ -25,6 +23,14 @@ a, a:hover, a:focus {
 	text-decoration: none;
 }
 
+a {
+	color: #e74c3c;
+}
+
+a:hover {
+	color: #c0392b;
+}
+
 #nav {
 	ul {
 		padding-left: 0;
@@ -33,23 +39,37 @@ a, a:hover, a:focus {
 	li {
 		display: inline-block;
 		width: 100px;
+
+		a {
+			font-size: 16px;
+			color: $light;
+		}
+
+		a:hover {
+			color: $dark;
+		}
+
+		a.active {
+			color: $dark;
+			font-weight: 400;
+		}
 	}
 }
 
-#content, header, footer {
+#nav, #content {
+	max-width: 950px;
+	margin: auto;
+}
+
+footer {
 	text-align: center;
 }
 
-header {
-	.active {
-		font-weight: 700;
-	}
-}
-
 h1 {
-	font-size: 36px;
-	font-weight: 600;
+	font-size: 42px;
+	font-weight: 400;
 	margin-bottom: 18px;
+	color: #21272d;
 }		
 
 .title {
@@ -63,17 +83,14 @@ h1 {
 
 #home {
 
-	padding: 100px 0;
+	padding: 80px 0 40px 0;
 
 	.overview {
-		margin-bottom: 100px;
+		margin-bottom: 80px;
+		font-size: 16px;
 	}
 
 	#status {
-		margin: auto;
-		max-width: 1000px;
-		padding: 25px 25px;
-		background-color: aliceblue;
 		border-radius: 5px;
 	}
 
@@ -112,8 +129,7 @@ h1 {
 }
 
 #code {
-	padding: 25px;
-	max-width: 850px;
+	padding: 25px 0;
 	margin: auto;
 	text-align: left;
 
