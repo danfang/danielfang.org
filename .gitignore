@@ -1,5 +1,9 @@
 #### joe made this: https://goel.io/joe
 
+dist/
+index.js
+*.min.js
+
 #####=== Sass ===#####
 
 .sass-cache

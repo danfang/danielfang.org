@@ -81,7 +81,7 @@ var Home = React.createClass({
 		if (!me) return <div></div>;
 		var checkinNode = this.state.checkins.length ? <Checkin checkin={this.state.checkins[0]} /> : "";
 		var tweetNode = this.state.tweets.length ? <Tweet tweet={this.state.tweets[0]} /> : "";
-		var txnNode = this.state.btc ? <BtcTransaction txn={this.state.btc.txns[0]} /> : "";
+		//var txnNode = this.state.btc ? <BtcTransaction txn={this.state.btc.txns[0]} /> : "";
 		var addressNode = this.state.btc ? <BtcAddress addrs={this.state.btc.addrs} /> : "";
 		return (
 			<div id="home">
@@ -92,7 +92,6 @@ var Home = React.createClass({
 				</div>
 				<div id="status" className="row">
 					{tweetNode}
-					{txnNode}
 					{checkinNode}
 				</div>
 			</div>
