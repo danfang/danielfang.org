@@ -39,7 +39,6 @@ var App = React.createClass({
 				<header id="nav">
 					<ul>
 						<li><Link to="home">Home</Link></li>
-						<li><Link to="code">Code</Link></li>
 						<li><a target="_blank" href="resume.pdf">R&eacute;sum&eacute;</a></li>
 					</ul>
 				</header>
@@ -92,9 +91,9 @@ var Home = React.createClass({
 					<p className="current">Currently working on <a target="_blank" href={me.currentWork.url}>{me.currentWork.name}</a>.</p>
 				</div>
 				<div id="status" className="row">
-					{checkinNode}
 					{tweetNode}
 					{txnNode}
+					{checkinNode}
 				</div>
 			</div>
 		);
