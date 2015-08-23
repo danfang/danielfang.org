@@ -1,5 +1,5 @@
 $dark: #666;
-$light: rgba(0, 0, 0, 0.3);
+$light: rgba(0, 0, 0, 0.4);
 
 $screen-xs: 768px;
 
@@ -38,7 +38,7 @@ a:hover {
 
 	li {
 		display: inline-block;
-		width: 100px;
+		padding-right: 50px;
 
 		a {
 			font-size: 16px;
@@ -133,6 +133,25 @@ h1 {
 	}
 }
 
+#projects {
+	padding: 25px 0 50px 0;
+	margin: auto;
+
+	.project {
+		margin-bottom: 35px;
+
+		.title {
+			font-size: 20px;
+			margin-bottom: 5px;
+
+			a {
+				margin-left: 10px;
+				font-size: 16px;
+			}
+		}
+	}
+}
+
 #code {
 	padding: 25px 0;
 	margin: auto;
@@ -147,7 +166,7 @@ h1 {
 
 		.fa {
 			margin-right: 10px;
-			color: #666;
+			color: $dark;
 		}
 	}
 }

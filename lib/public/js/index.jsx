@@ -39,6 +39,7 @@ var App = React.createClass({
 				<header id="nav">
 					<ul>
 						<li><Link to="home">Home</Link></li>
+						<li><Link to="projects">Projects</Link></li>
 						<li><a target="_blank" href="resume.pdf">R&eacute;sum&eacute;</a></li>
 					</ul>
 				</header>
@@ -83,6 +84,9 @@ var Home = React.createClass({
 		var tweetNode = this.state.tweets.length ? <Tweet tweet={this.state.tweets[0]} /> : "";
 		//var txnNode = this.state.btc ? <BtcTransaction txn={this.state.btc.txns[0]} /> : "";
 		var addressNode = this.state.btc ? <BtcAddress addrs={this.state.btc.addrs} /> : "";
+        var projectNodes = me.projects.map(function(el) {
+            return <Project project={el} />;
+        });
 		return (
 			<div id="home">
 				<div className="overview">
@@ -90,14 +94,38 @@ var Home = React.createClass({
 					<p className="bio">{me.bio}</p>
 					<p className="current">Currently working on <a target="_blank" href={me.currentWork.url}>{me.currentWork.name}</a>.</p>
 				</div>
-				<div id="status" className="row">
-					{tweetNode}
-					{checkinNode}
-				</div>
+				<div id="status" className="row">{tweetNode}{checkinNode}</div>
 			</div>
 		);
 	}}
 );
+
+var Projects = React.createClass({
+	render: function() {
+		var me = this.props.me;
+		if (!me) return <div></div>;
+        var projectNodes = me.projects.map(function(el) {
+            return <Project project={el} />;
+        });
+        return <div id="projects">{projectNodes}</div>;
+	}
+});
+
+var Project = React.createClass({
+    render: function() {
+    	var project = this.props.project;
+    	var imgNode = project.img? <img src={project.img} /> : "";
+    	var urlNode = project.url? <a target="_blank" href={project.url}><i className="fa fa-external-link"></i></a> : "";
+    	return (
+    		<div className="project">
+    			<h1 className="title">{project.title}{urlNode}</h1>
+    			<p className="date">{project.date}</p>
+    			<p className="description">{project.description}</p>
+    			{imgNode}
+    		</div>
+		);
+    }
+});
 
 var Checkin = React.createClass({
 	render: function() {
@@ -305,6 +333,7 @@ var IssuesEvent = React.createClass({
 var routes = (
   <Route name="app" path="/" handler={App}>
     <Route name="code" handler={Code}/>
+    <Route name="projects" handler={Projects}/>
     <DefaultRoute name="home" handler={Home}/>
   </Route>
 );
