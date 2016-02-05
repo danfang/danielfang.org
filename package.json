@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "My personal website - powered by Me API",
   "scripts": {
-    "start": "lib/bin/www"
+    "start": "lib/bin/www",
+    "build": "grunt"
   },
   "repository": {
     "type": "git",

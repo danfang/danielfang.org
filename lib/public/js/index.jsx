@@ -31,6 +31,7 @@ var App = React.createClass({
 					<a target="_blank" href={me.contact.github}><i className="fa fa-github"></i></a>
 					<a target="_blank" href={me.contact.linkedin}><i className="fa fa-linkedin"></i></a>
 					<a target="_blank" href={me.contact.twitter}><i className="fa fa-twitter"></i></a>
+					<a target="_blank" href={me.contact.keybase}><i className="fa fa-key"></i></a>
 				</div>
 			);
 		}
