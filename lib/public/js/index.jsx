@@ -2,9 +2,10 @@ var API_URL = "http://api.danielfang.org/";
 
 var Router = ReactRouter;
 var DefaultRoute = Router.DefaultRoute;
+var RouteHandler = Router.RouteHandler;
+
 var Link = Router.Link;
 var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
 
 var getFromNow = function(date) {
 	return moment(new Date(date)).fromNow();
@@ -78,54 +79,66 @@ var Home = React.createClass({
 			this.setState({ btc: data });
 		}.bind(this));
 	},
-	render: function() { 
+	render: function() {
 		var me = this.props.me;
-		if (!me) return <div></div>;
+		if (!me) return (
+			<div id="home">
+				<div className="overview">
+					<h1>Daniel Fang</h1>
+					<h3>
+						<a target="_blank" href="http://api.danielfang.org">api.danielfang.org</a>
+						<span> is currently unavailable!</span>
+					</h3>
+				</div>
+			</div>
+		);
 		var checkinNode = this.state.checkins.length ? <Checkin checkin={this.state.checkins[0]} /> : "";
 		var tweetNode = this.state.tweets.length ? <Tweet tweet={this.state.tweets[0]} /> : "";
-		//var txnNode = this.state.btc ? <BtcTransaction txn={this.state.btc.txns[0]} /> : "";
-		var addressNode = this.state.btc ? <BtcAddress addrs={this.state.btc.addrs} /> : "";
-        var projectNodes = me.projects.map(function(el) {
-            return <Project project={el} />;
-        });
 		return (
 			<div id="home">
 				<div className="overview">
 					<h1>{me.name}</h1>
 					<p className="bio">{me.bio}</p>
-					<p className="current">Currently working on <a target="_blank" href={me.currentWork.url}>{me.currentWork.name}</a>.</p>
+					<p className="current">{'Currently working on '}
+						<a target="_blank" href={me.currentWork.url}>
+							{me.currentWork.name}
+						</a>
+					.</p>
 				</div>
-				<div id="status" className="row">{tweetNode}{checkinNode}</div>
+				<div id="status" className="row">
+					{tweetNode}
+					{checkinNode}
+				</div>
 			</div>
 		);
-	}}
-);
+	}
+});
 
 var Projects = React.createClass({
 	render: function() {
 		var me = this.props.me;
-		if (!me) return <div></div>;
-        var projectNodes = me.projects.map(function(el) {
-            return <Project project={el} />;
-        });
-        return <div id="projects">{projectNodes}</div>;
+		if (!me) return <div id="projects"></div>;
+    var projectNodes = me.projects.map(function(el) {
+        return <Project project={el} />;
+    });
+    return <div id="projects">{projectNodes}</div>;
 	}
 });
 
 var Project = React.createClass({
-    render: function() {
-    	var project = this.props.project;
-    	var imgNode = project.img? <img src={project.img} /> : "";
-    	var urlNode = project.url? <a target="_blank" href={project.url}><i className="fa fa-external-link"></i></a> : "";
-    	return (
-    		<div className="project">
-    			<h1 className="title">{project.title}{urlNode}</h1>
-    			<p className="date">{project.date}</p>
-    			<p className="description">{project.description}</p>
-    			{imgNode}
-    		</div>
-		);
-    }
+  render: function() {
+  	var project = this.props.project;
+  	var imgNode = project.img? <img src={project.img} /> : "";
+  	var urlNode = project.url? <a target="_blank" href={project.url}><i className="fa fa-external-link"></i></a> : "";
+  	return (
+  		<div className="project">
+  			<h1 className="title">{project.title}{urlNode}</h1>
+  			<p className="date">{project.date}</p>
+  			<p className="description">{project.description}</p>
+  			{imgNode}
+  		</div>
+	);
+  }
 });
 
 var Checkin = React.createClass({
@@ -171,174 +184,13 @@ var Tweet = React.createClass({
 		);
 	}
 });
-
-
-var BtcTransaction = React.createClass({
-	render: function() {
-		var txn = this.props.txn;
-		var amount = Number(txn.amount.amount);
-		var recipient = txn.recipient ? txn.recipient.name : txn.recipient_address.splice(5);
-		var coinbaseURL = "https://www.coinbase.com/join/dfang1";
-		return (
-			<div className="btc-txn media col-md-4" id="latest-txn">
-				<div className="media-left">
-					<a target="_blank" href={coinbaseURL}>
-						<i className="fa fa-2x fa-money"></i>
-					</a>
-				</div>
-				<div className="media-body">					
-					<a target="_blank" href={coinbaseURL}>
-						<p className="title">
-							{amount < 0 ? "Sent ": "Received "}
-							{Math.abs(amount)} {txn.amount.currency} {amount < 0 ? "to ": "from "} {recipient}
-						</p>
-					</a>
-					<p className="description">{txn.notes}</p>
-					<p className="date">{getFromNow(txn.created_at)}</p>
-				</div>
-			</div>
-		);
-	}
-});
-
-var BtcAddress = React.createClass({
-	render: function() {
-		var addrs = this.props.addrs;
-		var addr = addrs[Math.floor(Math.random()*addrs.length)];
-		return (
-			<div className="btc-addr" id="btc-addr">
-				<i className="fa fa-btc"></i>
-				<span className="addr">{addr.address.address}</span>
-			</div>
-		);
-	}
-});
-
-var Code = React.createClass({	
-	getInitialState: function() {
-		return { events: [] };
-	},
-	componentDidMount: function() {
-		$.get(API_URL + "code", function(data) {
-			console.log(data);
-			this.setState({ events: data });
-		}.bind(this));
-	},
-	render: function() { 
-		if (!this.state.events.length) return <div></div>;
-		var eventNodes = this.state.events.map(function(event) {
-			if (event.type == 'WatchEvent') return <WatchEvent event={event} />;
-			if (event.type == 'CreateEvent') return <CreateEvent event={event} />;
-			if (event.type == 'PushEvent') return <PushEvent event={event} />;
-			if (event.type == 'PublicEvent') return <PublicEvent event={event} />;
-			if (event.type == 'IssuesEvent') return <IssuesEvent event={event} />;
-		});
-		return (
-			<div id="code">
-				<h1>My latest Github activity</h1>
-				<div className="events">
-					{eventNodes}
-				</div>
-			</div>
-		);
-	}
-});
-
-var WatchEvent = React.createClass({
-	render: function() {
-		var event = this.props.event;
-		var repo = event.repo;
-		return (
-			<div className="github-event">
-				<p className="title">
-					<i className="fa fa-star-o fa-lg"></i>
-					Starred <a target="_blank" href={"https://github.com/" + repo.name}>{repo.name}</a>
-				</p>
-				<p className="date">{getFromNow(event.created_at)}</p>
-			</div>
-		);
-	}
-});
-
-var CreateEvent = React.createClass({
-	render: function() {
-		var event = this.props.event;
-		var repo = event.repo;
-		return (
-			<div className="github-event">
-				<p className="title">
-					<i className="fa fa-code-fork fa-lg"></i>
-					Created {event.payload.ref_type} {event.payload.ref} in
-					<a target="_blank" href={"https://github.com/" + repo.name}> {repo.name}</a>
-				</p>
-				<p className="date">{getFromNow(event.created_at)}</p>
-			</div>
-		);
-	}
-});
-
-var PushEvent = React.createClass({
-	render: function() {
-		var event = this.props.event;
-		var repo = event.repo;
-		return (
-			<div className="github-event">
-				<p className="title">
-					<i className="fa fa-code fa-lg"></i>
-					Pushed {event.payload.commits.length} commit{event.payload.commits.length == 1 ? "" : "s"} to
-					<a target="_blank" href={"https://github.com/" + repo.name}> {repo.name}</a>
-				</p>
-				<p className="commit">&quot;{event.payload.commits[0].message}&quot; on {event.payload.ref}</p>
-				<p className="date">{getFromNow(event.created_at)}</p>
-			</div>
-		);
-	}
-});
-
-var PublicEvent = React.createClass({
-	render: function() {
-		var event = this.props.event;
-		var repo = event.repo;
-		return (
-			<div className="github-event">
-				<p className="title">
-					<i className="fa fa-code fa-lg"></i>
-					Open sourced <a target="_blank" href={"https://github.com/" + repo.name}> {repo.name}</a>
-				</p>
-				<p className="date">{getFromNow(event.created_at)}</p>
-			</div>
-		);
-	}
-});
-
-var IssuesEvent = React.createClass({
-	render: function() {
-		var event = this.props.event;
-		var action = event.payload.action;
-		action = action.charAt(0).toUpperCase() + action.slice(1);
-		var repo = event.repo;
-		return (
-			<div className="github-event">
-				<p className="title">
-					<i className="fa fa-flag-o fa-lg"></i>
-					{action} <a target="_blank" href={event.payload.issue.html_url}>issue</a> in <a target="_blank" href={"https://github.com/" + repo.name}> {repo.name}</a>
-				</p>
-				<p className="description">{event.payload.issue.title}</p>
-				<p className="date">{getFromNow(event.created_at)}</p>
-			</div>
-		);
-	}
-});
-
-
 var routes = (
   <Route name="app" path="/" handler={App}>
-    <Route name="code" handler={Code}/>
     <Route name="projects" handler={Projects}/>
     <DefaultRoute name="home" handler={Home}/>
   </Route>
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById("global-container"));
+  ReactDOM.render(<Handler/>, document.getElementById("root"));
 });
