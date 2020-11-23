@@ -1,12 +1,3 @@
-import {
-  faFacebookF,
-  faGithub,
-  faLinkedin,
-  faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { faKey, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
@@ -28,7 +19,6 @@ class App extends React.Component<{}, State> {
     const r = await fetch(API_URL);
     if (r) {
       const data = await r.json();
-      console.log(data.me);
       this.setState({ me: data.me });
     }
   }
@@ -38,29 +28,18 @@ class App extends React.Component<{}, State> {
     let contactNode;
     if (me) {
       contactNode = (
-        <div id="contact">
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={"mailto:" + me.contact.email}
-          >
-            <FontAwesomeIcon icon={faEnvelope} />
-          </a>
-          <a target="_blank" rel="noreferrer" href={me.contact.facebook}>
-            <FontAwesomeIcon icon={faFacebookF} />
-          </a>
-          <a target="_blank" rel="noreferrer" href={me.contact.github}>
-            <FontAwesomeIcon icon={faGithub} />
-          </a>
-          <a target="_blank" rel="noreferrer" href={me.contact.linkedin}>
-            <FontAwesomeIcon icon={faLinkedin} />
-          </a>
-          <a target="_blank" rel="noreferrer" href={me.contact.twitter}>
-            <FontAwesomeIcon icon={faTwitter} />
-          </a>
-          <a target="_blank" rel="noreferrer" href={me.contact.keybase}>
-            <FontAwesomeIcon icon={faKey} />
-          </a>
+        <div>
+          {me.contact.map((c: any) => (
+            <a
+              key={c.name}
+              target="_blank"
+              rel="noreferrer"
+              href={c.link}
+              style={{ marginRight: 5 }}
+            >
+              {c.name}
+            </a>
+          ))}
         </div>
       );
     }
@@ -132,30 +111,21 @@ class Home extends React.Component<{ me?: any }, HomeState> {
 
   render() {
     var me = this.props.me;
-    if (!me)
-      return (
-        <div id="home">
-          <div className="overview">
-            <h1>Daniel Fang</h1>
-            <h3>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="https://api.danielfang.org"
-              >
-                api.danielfang.org
-              </a>
-              <span> is currently unavailable!</span>
-            </h3>
-          </div>
-        </div>
+    let description;
+    if (!me) {
+      description = (
+        <h3>
+          <a target="_blank" rel="noreferrer" href="https://api.danielfang.org">
+            api.danielfang.org
+          </a>
+          <span> is currently unavailable!</span>
+        </h3>
       );
-    return (
-      <div id="home">
-        <div className="overview">
-          <h1>{me.name || "Daniel Fang"}</h1>
-          <p className="bio">{me.bio}</p>
-          <p className="current">
+    } else {
+      description = (
+        <div>
+          <p>{me.bio}</p>
+          <p>
             {"Currently working on "}
             <a target="_blank" rel="noreferrer" href={me.currentWork.url}>
               {me.currentWork.name}
@@ -163,7 +133,15 @@ class Home extends React.Component<{ me?: any }, HomeState> {
             .
           </p>
         </div>
-        <div id="status" className="row">
+      );
+    }
+    return (
+      <div>
+        <div>
+          <h1>{me?.name || "Daniel Fang"}</h1>
+          {description}
+        </div>
+        <div>
           {this.state.tweets.length > 0 && (
             <Tweet tweet={this.state.tweets[0]} />
           )}
@@ -179,10 +157,10 @@ class Home extends React.Component<{ me?: any }, HomeState> {
 function Projects(props: { me?: any }) {
   var me = props.me;
   if (!me) {
-    return <div id="projects"></div>;
+    return null;
   }
   return (
-    <div id="projects">
+    <div>
       {me.projects.map((p: any) => (
         <Project key={p.title} project={p} />
       ))}
@@ -193,16 +171,16 @@ function Projects(props: { me?: any }) {
 function Project(props: { project: any }) {
   var project = props.project;
   return (
-    <div className="project">
-      <h1 className="title">
+    <div>
+      <h2>
         {project.url ? (
           <a href={project.url}>{project.title}</a>
         ) : (
           project.title
         )}
-      </h1>
-      <p className="date">{project.date}</p>
-      <p className="description">{project.description}</p>
+      </h2>
+      <p>{project.date}</p>
+      <p>{project.description}</p>
     </div>
   );
 }
@@ -213,19 +191,12 @@ function Checkin(props: { checkin: any }) {
   var mapsURL = "https://www.google.com/maps?z=12&t=m&q=loc:";
   mapsURL += venue.location.lat + "+" + venue.location.lng;
   return (
-    <div className="checkin media col-md-4" id="latest-checkin">
-      <div className="media-left">
-        <a target="_blank" rel="noreferrer" href={mapsURL}>
-          <FontAwesomeIcon icon={faMapMarkedAlt} />
-        </a>
-      </div>
-      <div className="media-body">
-        <a target="_blank" rel="noreferrer" href={mapsURL}>
-          <p className="location title">{checkin.venue.name}</p>
-        </a>
-        <p className="description">{checkin.shout}</p>
-        <p className="date">{getFromNow(checkin.createdAt * 1000)}</p>
-      </div>
+    <div>
+      {"Visited "}
+      <a target="_blank" rel="noreferrer" href={mapsURL}>
+        {checkin.venue.name}
+      </a>{" "}
+      {getFromNow(checkin.createdAt * 1000)}.
     </div>
   );
 }
@@ -234,20 +205,12 @@ function Tweet(props: { tweet: any }) {
   var tweet = props.tweet;
   var twitterURL = "https://twitter.com/" + tweet.user.screen_name;
   return (
-    <div className="tweet media col-md-4" id="latest-tweet">
-      <div className="media-left">
-        <a target="_blank" rel="noreferrer" href={twitterURL}>
-          <FontAwesomeIcon icon={faTwitter} />
-        </a>
-      </div>
-      <div className="media-body">
-        <a target="_blank" rel="noreferrer" href={twitterURL}>
-          <p className="screenName title">@{tweet.user.screen_name}</p>
-        </a>
-        <p className="description">{tweet.text}</p>
-        <p className="date">{getFromNow(tweet.created_at)}</p>
-      </div>
-    </div>
+    <p>
+      <a target="_blank" rel="noreferrer" href={twitterURL}>
+        @{tweet.user.screen_name}
+      </a>
+      : {tweet.text}
+    </p>
   );
 }
 
