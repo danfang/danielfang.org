@@ -80,6 +80,7 @@ class App extends React.Component<{}, State> {
             >
               danfang/me-api
             </a>
+            . View <a href={API_URL}> API</a>.
           </p>
           {contactNode}
         </footer>
